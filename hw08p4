@@ -1,0 +1,29 @@
+import numpy,math
+from numpy import mean
+from numpy.random import seed,randint
+from matplotlib import pyplot
+
+
+seed(1)
+roll = randint(150, 201, 10000000)
+print(mean(roll))
+#generating a population of people's height generated randomly between 150 and 200 centimeters.
+
+
+avg=mean(roll[500:1000])
+sd=numpy.std(roll[500:1000])
+print(avg,sd)
+m=1.96*sd/math.sqrt(500)
+print(avg,avg-m,avg+m)
+#In this sample of people indexed from 500 to 1000, the mean is 175.42, the 95% confidence interval is [169.4880462944568 177.47195370554317]
+
+
+ininterval=0
+outinterval=0
+for i in range(0,10000):
+    if mean(roll[500*i:500*i+500])>174.12776236304802 and mean(roll[500*i:500*i+500])<176.62823763695195:
+        ininterval+=1
+    else:
+        outinterval+=1
+print(ininterval/(10000))
+#trying to simulate a 95% result.
